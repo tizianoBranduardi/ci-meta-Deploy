@@ -11,6 +11,7 @@ class Document(ModelRestApi):
     resource_name = 'document'
     datamodel = SQLAInterface(Document)
     base_order = ('id', 'asc')
+    base_filters = [['is_deleted', FilterEquals, 'false']]
     page_size=1000
 
 appbuilder.add_api(Document)
