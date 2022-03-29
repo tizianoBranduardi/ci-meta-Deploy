@@ -3,7 +3,19 @@
     <b-row>
       <b-col class="text-center">
         <h2 >Places</h2>
-        <b-button variant="link" size="sm" @click="refresh()">refresh</b-button>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <div class="text-center">
+          <b-button variant="link" size="sm" @click="refresh()">refresh</b-button>
+          <p class="h4 mb-2">
+            <b-icon icon="plus-circle" variant="primary" size="lg">
+            </b-icon>
+            <b-button variant="link" @click="newPlace=!newPlace">Add New</b-button>
+          </p>
+          <insert-place v-show="newPlace"/>
+        </div>
       </b-col>
     </b-row>
     <br>
@@ -11,36 +23,25 @@
       <div v-if="!place.is_deleted">
       <b-row> 
         <b-col>
-          <strong>Id : {{ids[index]}}</strong>
+          <b-input-group prepend="City">
+            <b-form-input type="text" v-model="place.city"/>
+          </b-input-group>
         </b-col>
         <b-col>
-          <strong>City</strong> : <b-form-input type="text" v-model="place.city"/>
+          <b-input-group prepend="Description">
+            <b-form-input type="text" v-model="place.description"/>
+          </b-input-group>
         </b-col>
-        <b-col>
-          <div class="text-inline">
-          <strong>Description</strong> : <b-form-input type="text" v-model="place.description"/>
-          </div>
-        </b-col>
-        <b-col>
+        <b-col cols="12" md="auto">
           <div class="text-center">
-            <br>
-            <b-button variant="danger" @click="remove(index)">Delete</b-button>&emsp;
-            <b-button variant="success" @click="update(index)">Update</b-button>
+            <b-button size="sm" variant="success" @click="update(index)">Update</b-button>&emsp;
+            <b-button size="sm" variant="danger" @click="remove(index)">Delete</b-button>
           </div>
         </b-col>
       </b-row>
-      <br>
       <hr>
       </div>
     </div>
-    <b-row>
-      <b-col>
-        <div class="text-center">
-          <b-button variant="primary" @click="newPlace=!newPlace">Add New</b-button>
-          <insert-place v-show="newPlace"/>
-        </div>
-      </b-col>
-    </b-row>
   </b-container>
 </template>
 

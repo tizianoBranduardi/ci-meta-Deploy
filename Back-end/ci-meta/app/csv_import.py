@@ -23,7 +23,7 @@ def dateCheck( input ) :
     if input=="NULL" : 
         return None
     #Case only year
-    elif pattern_4digits.match( input ) :
+    elif pattern_4digits.match( str(input) ) :
         return "1-1"+input
     else :
         year=input.split('-')[0]
@@ -65,7 +65,7 @@ def main():
 
     if table_name == 'place' :
         for parameter in record_list :
-            new=Place(city=parameter[0], description=parameter[1], is_validated='true')
+            new=Place(city=parameter[0], description=parameter[1], is_validated=True)
             db.session.add(new)
         db.session.commit()
 
