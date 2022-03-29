@@ -78,7 +78,7 @@ AUTH_TYPE = AUTH_DB
 # Babel config for translations
 # ---------------------------------------------------
 # Setup default language
-BABEL_DEFAULT_LOCALE = "it"
+BABEL_DEFAULT_LOCALE = "en"
 # Your application default translation path
 BABEL_DEFAULT_FOLDER = "translations"
 # The allowed translation for you app
