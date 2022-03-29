@@ -64,7 +64,10 @@ def main():
         db.session.commit()
 
     if table_name == 'place' :
-        pass
+        for parameter in record_list :
+            new=Place(city=parameter[0], description=parameter[1], is_validated='true')
+            db.session.add(new)
+        db.session.commit()
 
 if __name__ == "__main__":
     main()
