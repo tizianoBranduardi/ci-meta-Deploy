@@ -28,13 +28,12 @@
       </b-container>
       <list-documents />
     </b-tab>
-    <b-tab title="Images" >
-      <insert-image-home />
-    </b-tab>
     <b-tab title="Places" >
       <list-places />
     </b-tab>
-    <b-tab title="Person" >
+    <b-tab title="Persons" >
+    </b-tab>
+    <b-tab title="Institutions" >
     </b-tab>
   </b-tabs>
 </div>

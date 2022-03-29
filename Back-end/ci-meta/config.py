@@ -119,3 +119,4 @@ APP_THEME = "cyborg.css"
 # APP_THEME = "yeti.css"
 
 SQLALCHEMY_TRACK_MODIFICATIONS = True
+FAB_API_SWAGGER_UI = True
