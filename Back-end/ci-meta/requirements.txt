@@ -1,0 +1,7 @@
+Flask == 1.1.4
+markupsafe == 2.0.1
+flask-sqlalchemy
+flask-appbuilder
+flask_cors
+psycopg2-binary
+uwsgi

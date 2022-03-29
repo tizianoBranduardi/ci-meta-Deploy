@@ -1,0 +1,8 @@
+
+$ npm install axios
+
+$ npm install vuex --save
+
+bootstrap
+
+echo 'export NODE_OPTIONS=--openssl-legacy-provider' >> ~/.profile
