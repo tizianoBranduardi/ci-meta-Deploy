@@ -4,7 +4,7 @@
             border-variant="default"
             header="Places"
             header-border-variant="default"
-            header-text-variant="default"
+            header-text-variant="bold"
             align="center"
             >
       <b-row>

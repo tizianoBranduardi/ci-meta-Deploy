@@ -1,6 +1,9 @@
 <template>
     <div>
-      <h2 class="text-center">Document {{id}}</h2>
+      <h2 class="text-center">Document {{collection}} {{folder}} - {{folderNumber}} {{shelfmark}}</h2>
+      <div class="text-center">
+        <i>Use the <b-icon icon="pencil-square" ></b-icon> button to edit the relative field. Press the <strong>Update</strong> button at the bottom to update the Document</i>
+      </div>
       <b-container>
         <hr>
         <b-row>
@@ -8,7 +11,7 @@
             <p v-show="!editType">
               <strong>Document type &emsp;</strong>{{documentType}}
               <b-button variant="link" size="sm" @click="editType = true">
-                  edit
+                  <b-icon icon="pencil-square" ></b-icon>
               </b-button>
             </p>
             <div>
@@ -25,12 +28,12 @@
             <p v-show="!editDate">
               <strong>Date &emsp;</strong>{{date}}
               <b-button variant="link" size="sm" @click="editDate = true">
-                  edit
+                  <b-icon icon="pencil-square" ></b-icon>
               </b-button>
             </p>
             <div>
               <b-input-group class="mt-3" v-show="editDate">
-                <b-form-input v-model="date" maxlength="255" placeholder=date />
+                <b-form-input type="date" v-model="date" maxlength="255" placeholder="Date" />
                 <b-input-group-append>
                   <b-button variant="info" @click="editDate=false">Update</b-button>
                 </b-input-group-append>
@@ -44,7 +47,7 @@
             <p v-show="!editCollection">
               <strong>Collection &emsp;</strong>{{collection}}
               <b-button variant="link" size="sm" @click="editCollection = true">
-                  edit
+                  <b-icon icon="pencil-square" ></b-icon>
               </b-button>
             </p>
             <div>
@@ -59,8 +62,8 @@
           <b-col b-col >
             <p v-show="!editFolder">
               <strong>Folder &emsp;</strong>{{folder}}
-              <b-button variant="link" @click="editFolder = true">
-                  edit
+              <b-button variant="link" size="sm" @click="editFolder = true">
+                  <b-icon icon="pencil-square" ></b-icon>
               </b-button>
             </p>
             <div>
@@ -75,8 +78,8 @@
           <b-col b-col >
             <p v-show="!editFolderNumber">
               <strong>Folder Number &emsp;</strong>{{folderNumber}}
-              <b-button variant="link" @click="editFolderNumber = true">
-                  edit
+              <b-button variant="link" size="sm" @click="editFolderNumber = true">
+                  <b-icon icon="pencil-square" ></b-icon>
               </b-button>
             </p>
             <div>
@@ -91,8 +94,8 @@
           <b-col b-col >
             <p v-show="!editShelfmark">
               <strong>Shelfmark &emsp;</strong>{{shelfmark}}
-              <b-button variant="link" @click="editShelfmark = true">
-                  edit
+              <b-button variant="link" size="sm" @click="editShelfmark = true">
+                  <b-icon icon="pencil-square" ></b-icon>
               </b-button>
             </p>
             <div>
@@ -113,8 +116,8 @@
             <p v-show="!editIncipit">
               <strong>Incipit &emsp;</strong>{{incipit}}
               &emsp;&emsp;
-              <b-button variant="link" @click="editIncipit = true">
-                  edit
+              <b-button variant="link" size="sm" @click="editIncipit = true">
+                  <b-icon icon="pencil-square" ></b-icon>
               </b-button>
             </p>
             <div>
@@ -133,8 +136,8 @@
             <p v-show="!editTranscription">
               <strong>Transcription &emsp;</strong>{{transcription}}
               &emsp;&emsp;
-              <b-button variant="link" @click="editTranscription = true">
-                  edit
+              <b-button variant="link" size="sm" @click="editTranscription = true">
+                  <b-icon icon="pencil-square" ></b-icon>
               </b-button>
             </p>
             <div>
@@ -156,8 +159,8 @@
             <p v-show="!editLanguage">
               <strong>Language &emsp;</strong>{{language}}
               &emsp;&emsp;
-              <b-button variant="link" @click="editLanguage = true">
-                  edit
+              <b-button variant="link" size="sm" @click="editLanguage = true">
+                  <b-icon icon="pencil-square" ></b-icon>
               </b-button>
             </p>
             <div>
@@ -178,7 +181,7 @@
             </p>
             <div>
             <b-input-group class="mt-3">
-              <b-form-input prepend="Note" v-model="note" maxlength="255" placeholder=note />
+              <b-form-input prepend="Note" v-model="note" maxlength="255" />
             </b-input-group>
             </div>
             <br>

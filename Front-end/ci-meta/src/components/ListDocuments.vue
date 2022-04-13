@@ -6,8 +6,11 @@
         <b-col>
           <div class="text-center">
             <b-button-group class="mx-1">
-              <b-button v-if="page>0" @click="page = page-1, loadPage()" variant="primary">&laquo;Page {{page}}</b-button>
-              <b-button v-if="ids.length==pageSize" @click="page = page+1, loadPage()" variant="primary">&raquo;Page {{page+2}}</b-button>
+              <b-button v-if="page>0" @click="page = page-1, loadPage()" variant="primary">&laquo;</b-button>
+              <b-button v-else>&laquo;</b-button>
+              <b-button disabled>Page {{page+1}}</b-button>
+              <b-button v-if="ids.length==pageSize" @click="page = page+1, loadPage()" variant="primary">&raquo;</b-button>
+              <b-button v-else>&raquo;</b-button>
             </b-button-group>
           </div>
           </b-col>
@@ -16,13 +19,13 @@
     </b-container>
 
     <p v-show="!show">Loading...</p>
-    <b-table-simple v-show="show" bordered="true">
+    <b-table-simple v-show="show">
       <b-thead>
         <b-tr>
-          <b-th>Id</b-th>
+          <b-th>Doc Id</b-th>
           <b-th>Doc Type</b-th>
-          <b-th>Real Id</b-th>
-          <b-th>Gregorian Date</b-th>
+          <b-th>Date</b-th>
+          <b-th></b-th>
           <b-th>Incipit</b-th>
           <b-th>Note</b-th>
         </b-tr>
@@ -31,12 +34,12 @@
       <b-tr v-for="(doc, index) in docs" :key="doc" v-show="!doc.is_deleted">
         <b-td>
           <b-button variant="link" @click="showDocs(ids[index])">
-                {{ids[index]}}
+            {{doc.collection}} {{doc.folder}} - {{doc.folder_number}} {{doc.shelfmark}}
           </b-button>
         </b-td>
-        <b-td>{{doc.type}}</b-td> 
-        <b-td>{{doc.collection}} {{doc.folder}} - {{doc.folder_number}} {{doc.shelfmark}}</b-td>
+        <b-td>{{doc.type}}</b-td>
         <b-td>{{doc.gregorian_date}}</b-td>
+        <b-td></b-td>
         <b-td>{{doc.incipit}}</b-td>
         <b-td>{{doc.note}}</b-td>
       </b-tr>
@@ -64,7 +67,8 @@ export default {
       try {
         this.error = false;
         const header = { 'Content-Type': 'application/json' };
-        const response = await this.$http.get('http://'+this.$store.state.address+'/api/v1/document/?q=(page:'+this.page+',page_size:'+this.pageSize+')', header);
+        //(page:0,page_size:10,filters:!((col:is_deleted,opr:eq,value:False)))
+        const response = await this.$http.get('http://'+this.$store.state.address+'/api/v1/document/?q=(page:'+this.page+',page_size:'+this.pageSize+',filters:!((col:is_deleted,opr:eq,value:False)))', header);
         console.log(response.data.count);
         if (response.data.count>=1){
           this.show=true;
