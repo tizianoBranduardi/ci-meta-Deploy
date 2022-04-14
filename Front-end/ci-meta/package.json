@@ -31,12 +31,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tizianoBranduardi/ci-meta-Front_end.git"
+    "url": "git+https://github.com/tizianoBranduardi/ci-meta-Deploy.git"
   },
   "author": "Tiziano Branduardi",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tizianoBranduardi/ci-meta-Front_end/issues"
+    "url": "https://github.com/tizianoBranduardi/ci-meta-Deploy/issues"
   },
-  "homepage": "https://github.com/tizianoBranduardi/ci-meta-Front_end#readme"
+  "homepage": "https://github.com/tizianoBranduardi/ci-meta-Deploy#readme"
 }
