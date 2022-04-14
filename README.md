@@ -111,5 +111,5 @@ Tacitroots project : https://sites.unimi.it/tacitroots/
 [license-shield]: https://img.shields.io/github/license/tizianoBranduardi/ci-meta-Deploy.svg?style=for-the-badge
 [license-url]: https://github.com/tizianoBranduardi/ci-meta-Deploy/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
+[linkedin-url]: https://www.linkedin.com/in/tiziano-branduardi-116166112/
 [product-screenshot]: images/screenshot.png
