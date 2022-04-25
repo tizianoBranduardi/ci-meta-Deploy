@@ -40,21 +40,20 @@ components: {},
   methods : {
     async submit(){
       try {
-          this.error = false;
-          const data = {city : this.city,
-                        description : this.description,
-                        is_deleted : false,
-                        is_validated : true};
-          const header = { 'Content-Type': 'application/json' };
-          const response = await this.$http.post('http://'+this.$store.state.address+'/api/v1/place/', data, header);
-          if (response.statusText=='CREATED'){
-
-            }
+        this.$parent.hideError();
+        const data = {city : this.city,
+                      description : this.description,
+                      is_deleted : false,
+                      is_validated : true};
+        const header = { 'Content-Type': 'application/json' };
+        const response = await this.$http.post('http://'+this.$store.state.address+'/api/v1/place/', data, header);
+        if (response.statusText=='CREATED'){
+            this.$parent.refresh();
+          }
         }
         catch (e) {
-          this.loading = false;
           console.log(e);
-          this.error = true;
+          this.$parent.showError();
         }
     }
   }

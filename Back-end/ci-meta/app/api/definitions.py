@@ -11,7 +11,6 @@ class Document(ModelRestApi):
     resource_name = 'document'
     datamodel = SQLAInterface(Document)
     base_order = ('id', 'asc')
-    base_filters = [['is_deleted', FilterEquals, 'false']]
     page_size=1000
 
 appbuilder.add_api(Document)
@@ -57,3 +56,17 @@ class Position(ModelRestApi):
     page_size=1000
 
 appbuilder.add_api(Position)
+
+class Institution(ModelRestApi):
+    resource_name = 'institution'
+    datamodel = SQLAInterface(Institution)
+    page_size=1000
+
+appbuilder.add_api(Institution)
+
+class Affiliation(ModelRestApi):
+    resource_name = 'affiliation'
+    datamodel = SQLAInterface(Affiliation)
+    page_size=1000
+
+appbuilder.add_api(Affiliation)

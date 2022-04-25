@@ -3,24 +3,25 @@
 
     <b-card
     title="Login"
-    style="max-width: 20rem;"
+    style="max-width: 40rem;"
     class="text-center"
     border-variant="warning"
     >
       <b-form inline v-if="!this.$store.state.logged">
-        <label class="sr-only" for="inline-form-input-username">Username</label>
-        <b-input-group prepend="@" class="mb-2 mr-sm-2 mb-sm-0">
-          <b-form-input v-model="uname" id="inline-form-input-username" placeholder="Username"></b-form-input>
-        </b-input-group>
-
-        <label class="sr-only" for="inline-form-input-password">Password</label>
-        <b-form-input
-          v-model="pw"
-          type="password"
-          id="inline-form-input-password"
-          class="mb-2 mr-sm-2 mb-sm-0"
-          placeholder="Password"
-        ></b-form-input>
+        <b-container>
+          <b-row>
+            <b-col>
+              <b-input-group prepend="Username" class="mb-2 mr-sm-2 mb-sm-0">
+                <b-form-input v-model="uname"></b-form-input>
+              </b-input-group>
+            </b-col>
+            <b-col>
+              <b-input-group prepend="Password" class="mb-2 mr-sm-2 mb-sm-0">
+                <b-form-input v-model="pw" type="password"></b-form-input>
+              </b-input-group>
+            </b-col>
+          </b-row>
+        </b-container>
         <br>
         <b-button v-on:click.prevent="login()" variant="primary">Login</b-button>
         <br>
@@ -84,12 +85,10 @@
           const headers = { 'Content-Type': 'application/json' };
           const response = await this.$http.get('http://'+this.address+'/api/v1/appuser/', headers);
           response.data.result.forEach((user, index) => {
-          if(user.username==this.uname){
-            console.log(response.data);
-            console.log(response.data.ids[index]);
-            this.$store.commit('id', response.data.ids[index]);
-            }
-          });
+            if(user.username==this.uname){
+              this.$store.commit('id', response.data.ids[index]);
+              }
+            });
         }
         catch (e){
           console.log(e);

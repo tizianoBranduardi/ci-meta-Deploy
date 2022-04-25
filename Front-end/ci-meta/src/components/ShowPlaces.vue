@@ -38,7 +38,6 @@ export default {
       const header = { 'Content-Type': 'application/json' };
       const response = await this.$http.get('http://'+this.$store.state.address+'/api/v1/position/', header);
       if (response.status==200){
-        console.log(response);
         response.data.result.forEach((position, index) => {
           if(response.data.ids[index][0]==this.docId){
             if(position.type=="to")

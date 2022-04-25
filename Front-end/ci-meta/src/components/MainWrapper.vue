@@ -1,18 +1,13 @@
 <template>
   <div>
     <div class="text-center" v-if="!this.$store.state.logged">
-      <br> 
         <h3>The Accademia del Cimento in Florence: tracing the roots of the European scientific enterprise</h3>
-      <br>
       <div>  
         <b-img center :src="images.cimento" fluid width="800"/>
       </div>
       <p>
-        The <strong>Accademia del Cimento</strong> is the first European society to put experimentation at the core of scientific activity and to be supported by a public power.
-      </p>
-      <p>
-        Login to access the services
-        <br>
+        This project analyses for the first time in its entirety the extensive corpus of unpublished documents, descriptions of experiments and thousands of epistolary exchanges between members of the Cimento and scholars throughout Europe. 
+        By looking at the sources in their entirety, it aims at systematically connecting the strictly experimental, theoretical and philosophical aspects of the Accademia with its intellectual history.
       </p>
       <login />
     </div>

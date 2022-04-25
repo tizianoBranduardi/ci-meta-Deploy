@@ -10,54 +10,61 @@
               <b-col class="text-cente">
                 <strong>Document type &emsp;</strong>
                 <b-form-select size="sm" v-model="documentType" :options="this.$store.state.documentType"/>
-                &emsp;or
-                <b-button variant="link" @click="insertDocType = true">
-                    Create a new type
-                </b-button>
               </b-col>
             </div>
-            <template #overlay>
-              <b-input-group class="mt-3">
-                <b-form-input v-model="newDocumentType" placeholder="Insert new doc type" />
-                <b-input-group-append>
-                  <b-button variant="info" @click="insertDocType=false & addNewType()">
-                    Update
-                  </b-button>
-                  <b-button variant="outline-secondary" @click="insertDocType=false">Back</b-button>
-                </b-input-group-append>
-              </b-input-group>
-            </template>
           </b-overlay>
         </b-row>
       </b-container>
       <br>
 
       <b-container>
-            <b-row>
-              <b-col>
-                <strong>Collection &emsp;</strong>
-                <b-form-input type="text" v-model="collection" />
-              </b-col>
-              <b-col>
-                <strong>Folder &emsp;</strong>
-                <b-form-input type="text" v-model="folder" />
-              </b-col>
-              <b-col>
-                <strong>Folder Number &emsp;</strong>
-                <b-form-input type="text" v-model="folderNumber" />
-              </b-col>
-              <b-col><strong>Shelfmark &emsp;</strong>
-              <b-form-input type="text" v-model="shelfmark" /></b-col>
-            </b-row>
-          </b-container>
+        <b-row>
+          <b-col>
+            <strong>Publication </strong>
+            <b-form-input type="text" v-model="publication" />
+          </b-col>
+          <b-col>
+            <strong>Archive </strong>
+            <b-form-input type="text" v-model="archive" />
+          </b-col>
+        </b-row>
+        <b-row >
+          <b-col>
           <br>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <strong>Collection &emsp;</strong>
+            <b-form-input type="text" v-model="collection" />
+          </b-col>
+          <b-col>
+            <strong>Folder &emsp;</strong>
+            <b-form-input type="text" v-model="folder" />
+          </b-col>
+          <b-col>
+            <strong>Folder Number &emsp;</strong>
+            <b-form-input type="text" v-model="folderNumber" />
+          </b-col>
+          <b-col><strong>Shelfmark &emsp;</strong>
+          <b-form-input type="text" v-model="shelfmark" /></b-col>
+        </b-row>
+      </b-container>
       <hr>
       <b-container>
         <b-row>
-          <b-input-group class="mt-3" style="display-inline">
-                <strong>Incipit &emsp;</strong>
-                <b-form-input v-model="incipit" maxlength="255" placeholder="" />
-              </b-input-group>
+          <b-col>
+            <b-input-group class="mt-3" style="display-inline">
+              <strong>Title &emsp;</strong>
+              <b-form-input v-model="title" maxlength="255" placeholder="" />
+            </b-input-group>
+          </b-col>
+          <b-col>
+            <b-input-group class="mt-3" style="display-inline">
+              <strong>Incipit &emsp;</strong>
+              <b-form-input v-model="incipit" maxlength="255" placeholder="" />
+            </b-input-group>
+          </b-col>
         </b-row>
       </b-container>
       <br>
@@ -77,45 +84,17 @@
         </b-row>
       </b-container>
       <br>
-
       <b-container>
         <b-row>
-          <b-overlay :show="insertLanguage" :opacity="1">
-            <div style="display-inline">
-              <b-col>
+          <b-col>
                 <strong>Document language &emsp;</strong>
                 <b-form-select size="sm" v-model="language" :options="this.$store.state.language"/>
-                &emsp;or
-                <b-button variant="link" @click="insertLanguage = true">
-                    Create a new language
-                </b-button>
               </b-col>
-            </div>
-            <template #overlay>
-              <b-input-group class="mt-3">
-                <b-form-input v-model="newLanguage" placeholder="Insert new language" />
-                <b-input-group-append>
-                  <b-button variant="info" @click="insertLanguage=false & addNewLanguage()">
-                    Update
-                  </b-button>
-                  <b-button variant="outline-secondary" @click="insertLanguage=false">Back</b-button>
-                </b-input-group-append>
-              </b-input-group>
-            </template>
-          </b-overlay>
-        </b-row>
-      </b-container>
-      <br>
-
-      <b-container>
-        <b-row>
           <b-col>
             <strong>Date &emsp;</strong>
             <input type="date" v-model="date" placeholder="YYYY-MM-DD" required pattern="\d{4}-\d{2}-\d{2}">
-          </b-col>
-          <b-col>
-            <br>
-            <b-form-checkbox size="md" :v-model="isDateDeduced">The date has been deduced?</b-form-checkbox>
+      
+            <b-form-checkbox size="sm" :v-model="isDateDeduced">The date has been deduced?</b-form-checkbox>
           </b-col>
           <b-col lg="2">
           </b-col>
@@ -148,7 +127,7 @@
       </div>
     </b-container>
 
-    <b-container v-show="success">
+    <b-container v-show="!success">
       <b-row>
         <b-col class="text-center">
           <p v-show="success">Success! {{this.toastText}}</p>
@@ -210,6 +189,9 @@ export default ({
         folderNumber: '',
         shelfmark: '',
         note: '',
+        publication: '',
+        archive: '',
+        title: '',
         insertDocType: false,
         newDocumentType: '',
         insertLanguage: false,
@@ -243,12 +225,6 @@ export default ({
         }
     },
     methods: {
-      addNewType() {
-        this.$store.commit('storeDocumentType', this.newDocumentType);
-      },
-      addNewLanguage() {
-        this.$store.commit('storeLanguage', this.newLanguage);
-      },
       async submit() {
         try {
           this.error = false;
@@ -264,7 +240,10 @@ export default ({
                         shelfmark: this.shelfmark,
                         folder: this.folder,
                         folder_number: this.folderNumber,
-                        is_date_deduced: this.isDateDeduced};
+                        is_date_deduced: this.isDateDeduced,
+                        publication: this.publication,
+                        archive: this.archive,
+                        };
           const header = { 'Content-Type': 'application/json' };
           this.loading=true;
           const response = await this.$http.post('http://'+this.$store.state.address+'/api/v1/document/', data, header);

@@ -1,5 +1,6 @@
 # coding: utf-8
 import json
+from os import defpath
 from typing import Text
 from sqlalchemy import Boolean, Column, Date, DateTime, ForeignKey, Integer, LargeBinary, String, UniqueConstraint, text, Sequence
 from sqlalchemy.orm import relationship
@@ -17,6 +18,9 @@ class Document(Model):
     transcription = Column(TEXT)
     language = Column(String(255))
     gregorian_date = Column(Date)
+    title = Column(String(255))
+    archive = Column(String(255))
+    publication = Column(String(255))
     collection = Column(String(255), unique=False)
     folder = Column(String(255), unique=False)
     note = Column(String(255))
@@ -27,11 +31,10 @@ class Document(Model):
 
     def json(self) :
 	    return {"id": self.id, "type": self.type, "incipit": self.incipit, "transcription": self.transcription,\
-            "language": self.language, "gregorian_date": self.gregorian_date, "collection": self.collection, "folder": self.folder,\
+            "language": self.language, "gregorian_date": str(self.gregorian_date), "collection": self.collection, "folder": self.folder,\
             "note": self.note, "shelfmark": self.shelfmark, "folder_number": self.folder_number, "is_date_deduced": self.is_date_deduced, "is_deleted": self.is_deleted}
-
     def __repr__(self):
-	    return json.dumps(self.json())
+        return json.dumps(self.json())
 
 class Appuser(Model):
     __tablename__ = 'appuser'
@@ -59,6 +62,13 @@ class Person(Model):
 
     id = Column(Integer, Sequence('person_id_seq'), primary_key=True, nullable=True)
     name = Column(String(255), unique=True)
+    name_latin = Column(String(255))
+    alias = Column(String(255))
+    birth = Column(Date)
+    death = Column(Date)
+    reference = Column(String(255))
+    links = Column(String(255))
+    notes = Column(String(255))
     is_deleted = Column(Boolean, server_default=text("false"))
     is_validated = Column(Boolean)
 
@@ -84,9 +94,10 @@ class Actor(Model):
         UniqueConstraint('document_id', 'person_id', 'role'),
     )
 
-    document_id = Column(ForeignKey('document.id', ondelete='CASCADE'), primary_key=True, nullable=False)
-    person_id = Column(ForeignKey('person.id', ondelete='CASCADE'), primary_key=True, nullable=False)
-    appuser_id = Column(ForeignKey('ab_user.id', ondelete='CASCADE'), primary_key=True, nullable=False)
+    id= Column(Integer, Sequence('actor_id_seq'), primary_key=True, nullable=True)
+    document_id = Column(ForeignKey('document.id', ondelete='CASCADE'), nullable=False)
+    person_id = Column(ForeignKey('person.id', ondelete='CASCADE'), nullable=False)
+    appuser_id = Column(ForeignKey('appuser.id', ondelete='CASCADE'), nullable=False)
     role = Column(String(255))
 
     appuser = relationship('User')
@@ -117,10 +128,10 @@ class Position(Model):
     __table_args__ = (
         UniqueConstraint('document_id', 'place_id', 'type'),
     )
-
-    document_id = Column(ForeignKey('document.id', ondelete='CASCADE'), primary_key=True, nullable=False)
-    place_id = Column(ForeignKey('place.id', ondelete='CASCADE'), primary_key=True, nullable=False)
-    appuser_id = Column(ForeignKey('ab_user.id', ondelete='CASCADE'), primary_key=True, nullable=False)
+    id= Column(Integer, Sequence('position_id_seq'), primary_key=True, nullable=True)
+    document_id = Column(ForeignKey('document.id', ondelete='CASCADE'), nullable=False)
+    place_id = Column(ForeignKey('place.id', ondelete='CASCADE'), nullable=False)
+    appuser_id = Column(ForeignKey('appuser.id', ondelete='CASCADE'), nullable=False)
     type = Column(String(255))
 
     appuser = relationship('User')
@@ -130,3 +141,32 @@ class Position(Model):
     def __repr__(self):
         return self.name
 
+class Institution(Model):
+    __tablename__ = 'institution'
+
+    id = Column(Integer, Sequence('institution_id_seq'), primary_key=True, nullable=True)
+    visibility = Column(String(255),nullable=True)
+    type = Column(String(255),nullable=True)
+    year = Column(Date,nullable=True)
+    place = Column(String(255),nullable=True)
+    notes = Column(String(255),nullable=True)
+
+    def __repr__(self):
+        return self.name
+
+class Affiliation(Model):
+    __tablename__ = 'affiliation'
+    __table_args__ = (
+        UniqueConstraint('person_id', 'institution_id', 'type'),
+    )
+
+    person_id = Column(ForeignKey('person.id', ondelete='CASCADE'), primary_key=True, nullable=False)
+    institution_id = Column(ForeignKey('institution.id', ondelete='CASCADE'), primary_key=True, nullable=False)
+    from_date = Column(Date)
+    to_date= Column(Date)
+
+    person = relationship('Person')
+    institution = relationship('Institution')
+
+    def __repr__(self):
+        return self.name

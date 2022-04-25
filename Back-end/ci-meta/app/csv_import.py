@@ -18,7 +18,8 @@ db = SQLA(app)
 
 def dateCheck( input ) :
     pattern_4digits = re.compile("^[0-9]{4}$")
-
+    if input is None :
+        return None
     #Case NULL
     if input=="NULL" : 
         return None
@@ -58,8 +59,8 @@ def main():
 
     if table_name == 'document' :
         for parameter in record_list :
-            parameter[0]=dateCheck(parameter[0])
-            new=Document(gregorian_date=parameter[0],type=parameter[1],incipit=parameter[2],transcription=parameter[3],collection=parameter[4],folder=parameter[5],folder_number=parameter[6],shelfmark=parameter[7],note=parameter[8])
+            parameter[1]=dateCheck(parameter[1])
+            new=Document(id=parameter[0], gregorian_date=parameter[1],type=parameter[2],title=parameter[3],incipit=parameter[4],transcription=parameter[5],archive=parameter[6],collection=parameter[7],folder=parameter[8],folder_number=parameter[9],shelfmark=parameter[10],publication=parameter[11],note=parameter[12])
             db.session.add(new)
         db.session.commit()
 

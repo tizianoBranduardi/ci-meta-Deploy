@@ -6,6 +6,7 @@
       </div>
       <b-container>
         <hr>
+<!-- Doc Type -->
         <b-row>
           <b-col b-col>
             <p v-show="!editType">
@@ -16,14 +17,14 @@
             </p>
             <div>
             <b-input-group class="mt-3" v-show="editType">
-              <b-form-input v-model="documentType" maxlength="255" placeholder=documentType />
+              <b-form-input v-model="documentType" maxlength="255" placeholder="Type" />
               <b-input-group-append>
                 <b-button variant="info" @click="editType=false">Update</b-button>
               </b-input-group-append>
             </b-input-group>
             </div>
           </b-col>
-
+<!-- Date -->
           <b-col b-col >
             <p v-show="!editDate">
               <strong>Date &emsp;</strong>{{date}}
@@ -33,7 +34,7 @@
             </p>
             <div>
               <b-input-group class="mt-3" v-show="editDate">
-                <b-form-input type="date" v-model="date" maxlength="255" placeholder="Date" />
+                <b-form-input type="date" v-model="date" placeholder="Date" />
                 <b-input-group-append>
                   <b-button variant="info" @click="editDate=false">Update</b-button>
                 </b-input-group-append>
@@ -41,7 +42,43 @@
             </div>
           </b-col>
         </b-row>
-
+        <b-row>
+<!-- Archive -->
+          <b-col b-col >
+            <p v-show="!editArchive">
+              <strong>Archive &emsp;</strong>{{archive}}
+              <b-button variant="link" size="sm" @click="editArchive = true">
+                  <b-icon icon="pencil-square" ></b-icon>
+              </b-button>
+            </p>
+            <div>
+              <b-input-group class="mt-3" v-show="editArchive">
+                <b-form-input v-model="archive" maxlength="255" placeholder="Archive" />
+                <b-input-group-append>
+                  <b-button variant="info" @click="editArchive=false">Update</b-button>
+                </b-input-group-append>
+              </b-input-group>
+            </div>
+          </b-col>
+<!-- Publication -->
+          <b-col b-col >
+            <p v-show="!editPublication">
+              <strong>Publication &emsp;</strong>{{publication}}
+              <b-button variant="link" size="sm" @click="editPublication = true">
+                  <b-icon icon="pencil-square" ></b-icon>
+              </b-button>
+            </p>
+            <div>
+              <b-input-group class="mt-3" v-show="editPublication">
+                <b-form-input v-model="publication" placeholder="Publication" />
+                <b-input-group-append>
+                  <b-button variant="info" @click="editPublication=false">Update</b-button>
+                </b-input-group-append>
+              </b-input-group>
+            </div>
+          </b-col>
+        </b-row>
+<!-- Real Id -->
         <b-row>
           <b-col b-col >
             <p v-show="!editCollection">
@@ -52,7 +89,7 @@
             </p>
             <div>
             <b-input-group class="mt-3" v-show="editCollection">
-              <b-form-input v-model="collection" maxlength="255" placeholder=collection />
+              <b-form-input v-model="collection" maxlength="255" placeholder="Collection" />
               <b-input-group-append>
                 <b-button variant="info" @click="editCollection=false">Update</b-button>
               </b-input-group-append>
@@ -68,7 +105,7 @@
             </p>
             <div>
             <b-input-group class="mt-3" v-show="editFolder">
-              <b-form-input v-model="folder" maxlength="255" placeholder=folder />
+              <b-form-input v-model="folder" maxlength="255" placeholder="Folder" />
               <b-input-group-append>
                 <b-button variant="info" @click="editFolder=false">Update</b-button>
               </b-input-group-append>
@@ -84,7 +121,7 @@
             </p>
             <div>
             <b-input-group class="mt-3" v-show="editFolderNumber">
-              <b-form-input v-model="folderNumber" maxlength="255" placeholder=folderNumber />
+              <b-form-input v-model="folderNumber" maxlength="255" placeholder="Folder Number" />
               <b-input-group-append>
                 <b-button variant="info" @click="editFolderNumber=false">Update</b-button>
               </b-input-group-append>
@@ -100,7 +137,7 @@
             </p>
             <div>
             <b-input-group class="mt-3" v-show="editShelfmark">
-              <b-form-input v-model="shelfmark" maxlength="255" placeholder=shelfmark />
+              <b-form-input v-model="shelfmark" maxlength="255" placeholder="Shelfmark" />
               <b-input-group-append>
                 <b-button variant="info" @click="editShelfmark=false">Update</b-button>
               </b-input-group-append>
@@ -110,8 +147,26 @@
         </b-row>
 
         <hr>
-
+<!-- Title -->
         <b-row>
+          <b-col b-col>
+            <p v-show="!editTitle">
+              <strong>Title &emsp;</strong>{{title}}
+              &emsp;&emsp;
+              <b-button variant="link" size="sm" @click="editTitle = true">
+                  <b-icon icon="pencil-square" ></b-icon>
+              </b-button>
+            </p>
+            <div>
+            <b-input-group class="mt-3" v-show="editTitle">
+              <b-form-input v-model="title" maxlength="255" placeholder="Title" />
+              <b-input-group-append>
+                <b-button variant="info" @click="editTitle=false">Update</b-button>
+              </b-input-group-append>
+            </b-input-group>
+            </div>
+          </b-col>
+<!-- Incipit -->
           <b-col b-col>
             <p v-show="!editIncipit">
               <strong>Incipit &emsp;</strong>{{incipit}}
@@ -122,7 +177,7 @@
             </p>
             <div>
             <b-input-group class="mt-3" v-show="editIncipit">
-              <b-form-input v-model="incipit" maxlength="255" placeholder=incipit />
+              <b-form-input v-model="incipit" maxlength="255" placeholder="Incipit" />
               <b-input-group-append>
                 <b-button variant="info" @click="editIncipit=false">Update</b-button>
               </b-input-group-append>
@@ -130,7 +185,7 @@
             </div>
           </b-col>
         </b-row>
-
+<!-- Transcription -->
         <b-row>
           <b-col b-col>
             <p v-show="!editTranscription">
@@ -142,7 +197,7 @@
             </p>
             <div>
             <b-input-group class="mt-3" v-show="editTranscription">
-              <b-form-textarea rows="6" v-model="transcription" maxlength="255" placeholder=transcription />
+              <b-form-textarea rows="6" v-model="transcription" maxlength="255" placeholder="Transcription" />
               <b-input-group-append>
                 <b-button variant="info" @click="editTranscription=false">Update</b-button>
               </b-input-group-append>
@@ -153,8 +208,9 @@
             <insert-image :id="id" ref="images"/>
           </b-col>
         </b-row>
-
+<!-- Language -->
         <b-row>
+          <br>
           <b-col b-col>
             <p v-show="!editLanguage">
               <strong>Language &emsp;</strong>{{language}}
@@ -165,7 +221,7 @@
             </p>
             <div>
             <b-input-group class="mt-3" v-show="editLanguage">
-              <b-form-input v-model="language" maxlength="255" placeholder=language />
+              <b-form-input v-model="language" maxlength="255" placeholder="Language" />
               <b-input-group-append>
                 <b-button variant="info" @click="editLanguage=false">Update</b-button>
               </b-input-group-append>
@@ -174,6 +230,42 @@
           </b-col>
         </b-row>
 
+        <hr>
+
+<!-- Places -->
+        <b-row v-show="!editPlace">
+          <b-col>
+            <show-places v-show="!editPlace" :docId="id"/>
+          </b-col>
+          <b-col class="text-center" sm="auto">
+            <b-button variant="primary" @click="editPlace=!editPlace" v-show="!editPlace">Edit Places</b-button>
+          </b-col>
+        </b-row>
+
+        <b-row v-show="editPlace">
+          <b-col class="text-center">
+            <b-card
+              border-variant="default"
+              header="Insert Places"
+              header-border-variant="default"
+              header-text-variant="default"
+              align="center"
+              style="max-width: 60rem;"
+              >
+              <b-row class="text-center">
+                <b-col>
+                Sent from<br><b-form-select v-model="placeFrom" :options="places"/>
+                </b-col>
+                <b-col>
+                Sent to<br><b-form-select v-model="placeTo" :options="places"/>
+                </b-col>
+              </b-row>
+            </b-card>
+          </b-col>
+        </b-row>
+
+        <br>
+<!-- Note -->
         <b-row>
           <b-col>
             <p>
@@ -187,34 +279,7 @@
             <br>
           </b-col>
         </b-row>
-        <b-row>
-          <show-places v-show="!editPlace" :docId="id"/>
-        </b-row>
-        <b-row>
-          <b-col class="text-center">
-            <br>
-            <b-button variant="primary" @click="editPlace=!editPlace">Edit Places</b-button>
-          </b-col>
-        </b-row>
-        <br>
-        <b-row v-show="editPlace">
-          <b-card
-            border-variant="default"
-            header="Insert Places"
-            header-border-variant="default"
-            header-text-variant="default"
-            align="center"
-            >
-            <b-row>
-              Sent from<br><b-form-select size="sm" v-model="placeFrom" :options="places"/><br>
-            </b-row>
-            <b-row>
-              Sent to<br><b-form-select size="sm" v-model="placeTo" :options="places"/><br>
-            </b-row>
-            <!-- Or<b-button variant="link" @click="createPlace=!createPlace">create a new place</b-button>
-            <insert-place v-show="createPlace"/> -->
-          </b-card>
-        </b-row>
+
       </b-container>
       <div v-show="deleteConfirm">
         <br>
@@ -260,6 +325,9 @@ export default {
       folderNumber: '',
       shelfmark: '',
       note: '',
+      title: '',
+      archive: '',
+      publication: '',
       error: false,
       editShelfmark: false,
       loading: false,
@@ -273,6 +341,9 @@ export default {
       editCollection: false,
       editFolder: false,
       editFolderNumber: false,
+      editArchive: false,
+      editTitle: false,
+      editPublication: false,
       deleteConfirm : false,
       places: [],
       editPlace : false,
@@ -298,6 +369,9 @@ export default {
         this.folderNumber=response.data.result.folder_number;
         this.shelfmark=response.data.result.shelfmark;
         this.note=response.data.result.note;
+        this.title=response.data.result.title;
+        this.archive=response.data.result.archive;
+        this.publication=response.data.result.publication;
         try {
           const header = { 'Content-Type': 'application/json' };
           const response = await this.$http.get('http://'+this.$store.state.address+'/api/v1/place/', header);
@@ -347,7 +421,10 @@ export default {
                       collection : this.collection,
                       shelfmark: this.shelfmark,
                       folder_number: this.folder_number,
-                      is_date_deduced: this.isDateDeduced};
+                      is_date_deduced: this.isDateDeduced,
+                      publication: this.publication,
+                      archive: this.archive,
+                      title: this.title};
         const header = { 'Content-Type': 'application/json' };
         this.loading=true;
         const response = await this.$http.put('http://'+this.$store.state.address+'/api/v1/document/'+this.id, data, header);

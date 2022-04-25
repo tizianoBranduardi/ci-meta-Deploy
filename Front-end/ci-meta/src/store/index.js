@@ -6,7 +6,7 @@ export default new Vuex.Store({
   state: {
     token: '',
     username: '',
-    address: 'localhost',
+    address: '172.20.27.81:8080/back-end',
     logged: false,
     id : 0,
     documentType: [{value: 'research notes', text: 'Research notes'},
@@ -29,11 +29,26 @@ export default new Vuex.Store({
     storeLanguage(state, newLanguage) {
       state.language.push({value: newLanguage.toLowerCase(), text: newLanguage.charAt(0).toUpperCase() + newLanguage.slice(1)});
     },
+    async initData(state) {
+      try {
+        const header = { 'Content-Type': 'application/json' };
+        const response = await this.$http.get('http://'+this.$store.state.address+'/api/v1/data/', header);
+        if (response.data.count>=1){
+          for( data in response.data.result) {
+            //TODO : aggiornare i campi delle lingue e doc type
+          }
+        }
+      }
+      catch (e) {
+        this.loading = false;
+        console.log(e);
+        this.error = true;
+      }
+    },
     logout(state) {
       state.token = '';
       state.username = '';
       state.logged = false;
-      state.address= '';
     },
   },
 });
