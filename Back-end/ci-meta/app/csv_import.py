@@ -70,5 +70,10 @@ def main():
             db.session.add(new)
         db.session.commit()
 
+    if table_name == 'person' :
+        for parameter in record_list :
+            new=Person(name=parameter[0], name_latin=parameter[1], alias=parameter[2], birth=parameter[3], death=parameter[4], reference=parameter[5], notes=parameter[6], wikidata=parameter[7], links=parameter[8])
+            db.session.add(new)
+        db.session.commit()
 if __name__ == "__main__":
     main()
