@@ -97,7 +97,7 @@ class Actor(Model):
     id= Column(Integer, Sequence('actor_id_seq'), primary_key=True, nullable=True)
     document_id = Column(ForeignKey('document.id', ondelete='CASCADE'), nullable=False)
     person_id = Column(ForeignKey('person.id', ondelete='CASCADE'), nullable=False)
-    appuser_id = Column(ForeignKey('appuser.id', ondelete='CASCADE'), nullable=False)
+    appuser_id = Column(ForeignKey('ab_user.id', ondelete='CASCADE'), nullable=False)
     role = Column(String(255))
 
     appuser = relationship('User')
@@ -131,7 +131,7 @@ class Position(Model):
     id= Column(Integer, Sequence('position_id_seq'), primary_key=True, nullable=True)
     document_id = Column(ForeignKey('document.id', ondelete='CASCADE'), nullable=False)
     place_id = Column(ForeignKey('place.id', ondelete='CASCADE'), nullable=False)
-    appuser_id = Column(ForeignKey('appuser.id', ondelete='CASCADE'), nullable=False)
+    appuser_id = Column(ForeignKey('ab_user.id', ondelete='CASCADE'), nullable=False)
     type = Column(String(255))
 
     appuser = relationship('User')
