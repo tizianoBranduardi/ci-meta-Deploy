@@ -149,7 +149,7 @@ class Institution(Model):
     name = Column(String(255),nullable=True)
     visibility = Column(String(255),nullable=True)
     type = Column(String(255),nullable=True)
-    year = Column(Date,nullable=True)
+    year = Column(String(255),nullable=True)
     place = Column(String(255),nullable=True)
     notes = Column(String(255),nullable=True)
 

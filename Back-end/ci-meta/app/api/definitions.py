@@ -39,6 +39,7 @@ appbuilder.add_api(Image)
 class Person(ModelRestApi):
     resource_name = 'person'
     datamodel = SQLAInterface(Person)
+    base_order = ('name', 'asc')
     page_size=1000
 
 appbuilder.add_api(Person)
@@ -46,6 +47,7 @@ appbuilder.add_api(Person)
 class Place(ModelRestApi):
     resource_name = 'place'
     datamodel = SQLAInterface(Place)
+    base_order = ('city', 'asc')
     page_size=1000
 
 appbuilder.add_api(Place)
@@ -60,6 +62,7 @@ appbuilder.add_api(Position)
 class Institution(ModelRestApi):
     resource_name = 'institution'
     datamodel = SQLAInterface(Institution)
+    base_order = ('name', 'asc')
     page_size=1000
 
 appbuilder.add_api(Institution)
