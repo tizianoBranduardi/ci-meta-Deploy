@@ -42,7 +42,7 @@
 <!-- Wiki & Links -->
       <b-row>
         <b-col b-col>
-            <strong>Wikid1ata</strong>
+            <strong>Wikidata</strong>
             <b-form-input v-model="wikidata" maxlength="255"/>
         </b-col>
         <b-col b-col >

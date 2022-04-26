@@ -78,7 +78,7 @@ def main():
 
     if table_name == 'institution' :
         for parameter in record_list :
-            new=Institution(name=parameter[0], visibility=parameter[1], type=parameter[2], year=parameter[3], place=parameter[5], notes=parameter[4])
+            new=Institution(name=parameter[0], visibility=parameter[2], type=parameter[1], year=parameter[3], place=parameter[5], notes=parameter[4])
             db.session.add(new)
         db.session.commit()
 

@@ -13,15 +13,14 @@
             </b-icon>
             <b-button variant="link" @click="newPerson=!newPerson, error=false">Add New</b-button>
           </p>
-          <insert-place v-show="newPlace"/>
           <div v-show="error" class="error">
             <br>
             <strong>Error - The person already exists or has been deleted</strong>
           </div>
         </div>
       </b-col>
-      <b-col v-show="editPerson">
-        <b-button variant="link" @click="editPerson=!editPerson">Back to list</b-button>
+      <b-col v-show="editPerson || newPerson">
+        <b-button variant="link" @click="editPerson=false, newPerson=false">Back to list</b-button>
       </b-col>
     </b-row>
     <b-row v-if="newPerson">
@@ -69,15 +68,15 @@
     <div v-for="(person, index) in persons" :key="person" v-show="!editPerson & !newPerson">
       <div v-if="!person.is_deleted">
       <b-row v-if="!editPerson">
-        <b-col>
+        <b-col cols=5>
           <strong>Name : </strong>{{person.name}}
         </b-col>
-        <b-col>
+        <b-col cols=6>
           <strong>Latin name : </strong>{{person.name_latin}}
         </b-col>
         <b-col>
           <b-button variant="link" size="sm" @click="id=ids[index], editPerson=true, refresh()">
-            <b-icon icon="pencil-square" ></b-icon>
+            <b-icon icon="search" ></b-icon>
           </b-button>
         </b-col>
       </b-row>
@@ -160,6 +159,7 @@ export default {
       exitEdit(){
         this.editPerson=false;
         this.newPerson=false;
+        this.refresh();
       }
     }
 };

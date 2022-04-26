@@ -22,8 +22,8 @@
     <b-table-simple v-show="show">
       <b-thead>
         <b-tr>
-          <b-th>Doc Id</b-th>
-          <b-th>Doc Type</b-th>
+          <b-th>Id</b-th>
+          <b-th>Type</b-th>
           <b-th>Date</b-th>
           <b-th></b-th>
           <b-th>Incipit</b-th>
@@ -34,7 +34,7 @@
       <b-tr v-for="(doc, index) in docs" :key="doc" v-show="!doc.is_deleted">
         <b-td>
           <b-button variant="link" @click="showDocs(ids[index])">
-            {{doc.collection}} {{doc.folder}} - {{doc.folder_number}} {{doc.shelfmark}}
+            {{doc.collection}} {{doc.folder}} - {{doc.folder_number}}
           </b-button>
         </b-td>
         <b-td>{{doc.type}}</b-td>

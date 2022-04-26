@@ -44,10 +44,10 @@
         </b-col>
       </b-row>
       <b-row v-if="!edit[ids[index]]">
-        <b-col>
+        <b-col cols=5>
           <strong>City : </strong>{{place.city}}
         </b-col>
-        <b-col>
+        <b-col cols=6>
           <strong>Description : </strong>{{place.description}}
         </b-col>
         <b-col>
