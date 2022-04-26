@@ -127,7 +127,7 @@
       </div>
     </b-container>
 
-    <b-container v-show="!success">
+    <b-container v-show="success">
       <b-row>
         <b-col class="text-center">
           <p v-show="success">Success! {{this.toastText}}</p>
@@ -141,22 +141,7 @@
           <insert-image :id="docId" ref="images" />
         </b-col>
         <b-col style="display-inline">
-          <b-card
-            border-variant="default"
-            header="Places"
-            header-border-variant="default"
-            header-text-variant="default"
-            align="center"
-            >
-            <b-row>
-              Sent from<br><b-form-select size="sm" v-model="placeFrom" :options="places"/><br>
-            </b-row>
-            <b-row>
-              Sent to<br><b-form-select size="sm" v-model="placeTo" :options="places"/><br>
-            </b-row>
-            Or<b-button variant="link" @click="createPlace=!createPlace">create a new place</b-button>
-            <insert-place v-show="createPlace"/>
-          </b-card>
+          <show-places v-show="!editPlace" :docId="docId"/>
         </b-col>
       </b-row>
       <b-row>
@@ -171,11 +156,11 @@
 </template>
 
 <script>
-import InsertPlace from './InsertPlace.vue';
+import ShowPlaces from './ShowPlaces.vue';
 import InsertImage from './InsertImage.vue';
 export default ({
     name: 'insertDocument',
-    components: { InsertImage, InsertPlace },
+    components: { InsertImage, ShowPlaces },
     data(){
       return{
         documentType: '',
@@ -263,30 +248,7 @@ export default ({
       },
       async secondSubmit(){
         this.$refs.images.submit();
-        try {
-          const data = { place: this.placeFrom,
-                        appuser: this.$store.state.id,
-                        document: this.docId,
-                        type: 'from'
-                        };
-          const header = { 'Content-Type': 'application/json' };
-          const response = await this.$http.post('http://'+this.$store.state.address+'/api/v1/position/', data, header);
-          if (response.statusText=='CREATED'){
-            const data = { place: this.placeTo,
-                        appuser: this.$store.state.id,
-                        document: this.docId,
-                        type: 'to'
-                        };
-            const header = { 'Content-Type': 'application/json' };
-            const response = await this.$http.post('http://'+this.$store.state.address+'/api/v1/position/', data, header);
-            if (response.statusText=='CREATED'){
-              this.$router.push({ name: 'Home'});
-            }
-          }
-        }
-        catch (e) {
-          console.log(e);
-        }
+        this.$router.push({ name: 'Home'});
       }
     },
 })

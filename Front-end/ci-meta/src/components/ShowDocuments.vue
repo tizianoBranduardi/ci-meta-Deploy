@@ -237,33 +237,7 @@
           <b-col>
             <show-places v-show="!editPlace" :docId="id"/>
           </b-col>
-          <b-col class="text-center" sm="auto">
-            <b-button variant="primary" @click="editPlace=!editPlace" v-show="!editPlace">Edit Places</b-button>
-          </b-col>
         </b-row>
-
-        <b-row v-show="editPlace">
-          <b-col class="text-center">
-            <b-card
-              border-variant="default"
-              header="Insert Places"
-              header-border-variant="default"
-              header-text-variant="default"
-              align="center"
-              style="max-width: 60rem;"
-              >
-              <b-row class="text-center">
-                <b-col>
-                Sent from<br><b-form-select v-model="placeFrom" :options="places"/>
-                </b-col>
-                <b-col>
-                Sent to<br><b-form-select v-model="placeTo" :options="places"/>
-                </b-col>
-              </b-row>
-            </b-card>
-          </b-col>
-        </b-row>
-
         <br>
 <!-- Note -->
         <b-row>
