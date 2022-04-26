@@ -66,10 +66,10 @@ class Person(Model):
     alias = Column(String(255))
     birth = Column(String(255))
     death = Column(String(255))
-    reference = Column(String(255))
+    reference = Column(TEXT)
     wikidata = Column(String(255))
     links = Column(String(255))
-    notes = Column(String(255))
+    notes = Column(TEXT)
     is_deleted = Column(Boolean, server_default=text("false"))
     is_validated = Column(Boolean)
 

@@ -38,6 +38,7 @@
         <list-places />
       </b-tab>
       <b-tab title="Persons" >
+        <list-persons />
       </b-tab>
       <b-tab title="Institutions" >
       </b-tab>
@@ -51,6 +52,7 @@ import InsertImageHome from './InsertImageHome.vue';
 import InsertPlace from './InsertPlace.vue';
 import ListDocuments from './ListDocuments.vue';
 import ListPlaces from './ListPlaces.vue';
+import ListPersons from './ListPersons.vue';
 import Login from './Login.vue';
 
   export default {
@@ -60,6 +62,7 @@ import Login from './Login.vue';
       InsertImageHome,
       InsertPlace,
       ListPlaces,
+      ListPersons,
       Login,
     },
     data() {
