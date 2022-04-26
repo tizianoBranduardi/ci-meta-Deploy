@@ -146,6 +146,7 @@ class Institution(Model):
     __tablename__ = 'institution'
 
     id = Column(Integer, Sequence('institution_id_seq'), primary_key=True, nullable=True)
+    name = Column(String(255),nullable=True)
     visibility = Column(String(255),nullable=True)
     type = Column(String(255),nullable=True)
     year = Column(Date,nullable=True)
