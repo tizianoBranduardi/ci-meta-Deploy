@@ -133,9 +133,9 @@ export default {
         const header = { 'Content-Type': 'application/json' };
         const data = {'person': this.personId, 'institution':parseInt(this.newInstitution.split("-")[0]), 'from_date': parseInt(this.newFrom), 'to_date': parseInt(this.newTo)};
         const response = await this.$http.post('http://'+this.$store.state.address+'/api/v1/affiliation/', data, header);
-        if(response.status==200){
+        if(response.status==201){
           this.newAffiliation=false;
-          this.affiliations.push(response.result);
+          this.reload();
         }
         else {
           this.error=true;
@@ -145,6 +145,23 @@ export default {
         this.error=true;
         console.log(e);
       }      
+    }, 
+    async reload(){
+      try {
+        const header = { 'Content-Type': 'application/json' };
+        const response = await this.$http.get('http://'+this.$store.state.address+'/api/v1/affiliation/', header);
+        if (response.status==200){
+          this.affiliations=[];
+          response.data.result.forEach((affiliation, index) => {
+            if(affiliation.person.id==this.personId){
+                this.affiliations.push(affiliation);
+            }
+          });
+        }
+      }
+      catch (e) {
+        console.log(e);
+      }
     }
     // async submit() {
     //   try {

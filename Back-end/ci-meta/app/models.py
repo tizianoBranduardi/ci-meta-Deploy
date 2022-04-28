@@ -158,9 +158,9 @@ class Affiliation(Model):
     __table_args__ = (
         UniqueConstraint('person_id', 'institution_id'),
     )
-
-    person_id = Column(ForeignKey('person.id', ondelete='CASCADE'), primary_key=True, nullable=False)
-    institution_id = Column(ForeignKey('institution.id', ondelete='CASCADE'), primary_key=True, nullable=False)
+    id=Column(Integer, Sequence('affiliation_id_seq'), primary_key=True, nullable=True)
+    person_id = Column(ForeignKey('person.id', ondelete='CASCADE'), nullable=False)
+    institution_id = Column(ForeignKey('institution.id', ondelete='CASCADE'), nullable=False)
     from_date = Column(Integer)
     to_date= Column(Integer)
 
