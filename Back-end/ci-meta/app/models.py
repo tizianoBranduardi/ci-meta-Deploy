@@ -91,9 +91,6 @@ class Place(Model):
 
 class Actor(Model):
     __tablename__ = 'actor'
-    __table_args__ = (
-        UniqueConstraint('document_id', 'person_id', 'role'),
-    )
 
     id= Column(Integer, Sequence('actor_id_seq'), primary_key=True, nullable=True)
     document_id = Column(ForeignKey('document.id', ondelete='CASCADE'), nullable=False)

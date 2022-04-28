@@ -41,7 +41,7 @@
 <script>
 export default {
   components: {},
-  name: 'ShowPlaces',
+  name: 'ShowEditPosition',
   props : {docId : 0},
   data () {
     return {

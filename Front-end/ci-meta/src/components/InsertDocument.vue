@@ -132,7 +132,7 @@
         <b-col class="text-center">
           <p v-show="success">Success! {{this.toastText}}</p>
           <hr>
-          <h3>Insert images - places - persons</h3>
+          <h3>Images - Places - Persons</h3>
           <br>
         </b-col>
       </b-row>
@@ -141,7 +141,7 @@
           <insert-image :id="docId" ref="images" />
         </b-col>
         <b-col style="display-inline">
-          <show-places v-show="!editPlace" :docId="docId"/>
+          <show-edit-position :docId="docId"/>
         </b-col>
       </b-row>
       <b-row>
@@ -156,11 +156,11 @@
 </template>
 
 <script>
-import ShowPlaces from './ShowPlaces.vue';
+import ShowEditPosition from './ShowEditPosition.vue';
 import InsertImage from './InsertImage.vue';
 export default ({
     name: 'insertDocument',
-    components: { InsertImage, ShowPlaces },
+    components: { InsertImage, ShowEditPosition },
     data(){
       return{
         documentType: '',
@@ -186,28 +186,7 @@ export default ({
         toastText: '',
         success: false,
         docId: 0,
-        places: [],
-        placeFrom: '',
-        placeTo: '',
-        createPlace : false,
       }
-    },
-    async mounted(){
-      try {
-          const header = { 'Content-Type': 'application/json' };
-          const response = await this.$http.get('http://'+this.$store.state.address+'/api/v1/place/', header);
-          if (response.status==200){
-            response.data.result.forEach((place,index) => {
-              if(!place.is_deleted && place.is_validated)
-                this.places.push({value:response.data.ids[index], text:place.city})
-            });
-          }
-        }
-        catch (e) {
-          this.loading = false;
-          console.log(e);
-          this.error = true;
-        }
     },
     methods: {
       async submit() {

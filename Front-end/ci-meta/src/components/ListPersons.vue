@@ -120,20 +120,6 @@ export default {
         
     },
     methods : {
-      // async remove(index) {
-      //   try {
-      //     const id = this.ids[index];
-      //     const header = { 'Content-Type': 'application/json' };
-      //     const data = {'is_deleted': 'true'};
-      //     const response = await this.$http.put('http://'+this.$store.state.address+'/api/v1/place/'+id, data, header);
-      //     if (response.status==200)
-      //       this.refresh();
-      //   }
-      // catch (e) {
-      //   console.log(e);
-      //   this.error = true;
-      //   }
-      // },
       async refresh(){
         try {
         const header = { 'Content-Type': 'application/json' };

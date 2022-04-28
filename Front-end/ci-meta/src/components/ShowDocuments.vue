@@ -233,9 +233,16 @@
         <hr>
 
 <!-- Places -->
-        <b-row v-show="!editPlace">
+        <b-row>
           <b-col>
-            <show-places v-show="!editPlace" :docId="id"/>
+            <show-edit-position :docId="id"/>
+          </b-col>
+        </b-row>
+        <br>
+<!-- Persons -->
+        <b-row>
+          <b-col>
+            <show-edit-actor :docId="id"/>
           </b-col>
         </b-row>
         <br>
@@ -281,9 +288,10 @@
 
 <script>
 import InsertImage from './InsertImage.vue';
-import ShowPlaces from './ShowPlaces.vue';
+import ShowEditPosition from './ShowEditPosition.vue';
+import ShowEditActor from './ShowEditActor.vue';
 export default {
-  components: { InsertImage, ShowPlaces },
+  components: { InsertImage, ShowEditPosition, ShowEditActor },
   name: 'ShowDocuments',
   props : ['id'],
   data () {
@@ -319,10 +327,6 @@ export default {
       editTitle: false,
       editPublication: false,
       deleteConfirm : false,
-      places: [],
-      editPlace : false,
-      placeFrom : '',
-      placeTo : '',
     }
   },
   async mounted() {
@@ -346,21 +350,6 @@ export default {
         this.title=response.data.result.title;
         this.archive=response.data.result.archive;
         this.publication=response.data.result.publication;
-        try {
-          const header = { 'Content-Type': 'application/json' };
-          const response = await this.$http.get('http://'+this.$store.state.address+'/api/v1/place/', header);
-          if (response.status==200){
-            response.data.result.forEach((place,index) => {
-              if(!place.is_deleted && place.is_validated)
-                this.places.push({value:response.data.ids[index], text:place.city})
-            });
-          }
-        }
-        catch (e) {
-          this.loading = false;
-          console.log(e);
-          this.error = true;
-        }
       }
     }
     catch (e) {
@@ -403,32 +392,8 @@ export default {
         this.loading=true;
         const response = await this.$http.put('http://'+this.$store.state.address+'/api/v1/document/'+this.id, data, header);
         if (response.status==200){
-          try {
-          const data = { place: this.placeFrom,
-                        appuser: this.$store.state.id,
-                        document: this.id,
-                        type: 'from'
-                        };
-          const header = { 'Content-Type': 'application/json' };
-          const response = await this.$http.post('http://'+this.$store.state.address+'/api/v1/position/', data, header);
-          if (response.statusText=='CREATED'){
-            const data = { place: this.placeTo,
-                        appuser: this.$store.state.id,
-                        document: this.id,
-                        type: 'to'
-                        };
-            const header = { 'Content-Type': 'application/json' };
-            const response = await this.$http.post('http://'+this.$store.state.address+'/api/v1/position/', data, header);
-            if (response.statusText=='CREATED'){
               this.$router.push({ name: 'Home'});
             }
-          }
-        }
-        catch (e) {
-          console.log(e);
-        }
-          this.$router.push({name: 'Home'});
-        }
       }
       catch (e) {
         console.log(e);
