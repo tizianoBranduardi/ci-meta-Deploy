@@ -173,8 +173,8 @@ class Affiliation(Model):
 class Quotation(Model):
     __tablename__ = 'citation'
 
-    quoting_document = Column(ForeignKey('document.id', ondelete='CASCADE'), nullable=False)
-    quoted_document = Column(ForeignKey('document.id', ondelete='CASCADE'), nullable=False)
+    quoting_document = Column(ForeignKey('document.id', ondelete='CASCADE'), primary_key=True, nullable=False)
+    quoted_document = Column(ForeignKey('document.id', ondelete='CASCADE'), primary_key=True, nullable=False)
 
     quoting = relationship('Document')
     quoted = relationship('Document')
