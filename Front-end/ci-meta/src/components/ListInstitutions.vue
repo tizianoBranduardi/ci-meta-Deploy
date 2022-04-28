@@ -11,9 +11,9 @@
           <p class="h4 mb-2">
             <b-icon icon="plus-circle" variant="primary" size="lg">
             </b-icon>
-            <b-button style="text-decoration: none;" variant="link" @click="newInstitution=!newInstitution, error=false">Add New</b-button>
+            <b-button style="text-decoration: none;" variant="link" @click="newInstitution=!newInstitution, institutionError=false">Add New</b-button>
           </p>
-          <div v-show="error" class="error">
+          <div v-show="institutionError" class="error">
             <br>
             <strong>Error - The institution already exists or has been deleted</strong>
           </div>
@@ -71,7 +71,7 @@ export default {
       institutions:[],
       editInstitution: false,
       newInstitution : false,
-      error: false,
+      institutionError: false,
     }
   },
     async mounted() {
@@ -86,7 +86,7 @@ export default {
       catch (e) {
         this.loading = false;
         console.log(e);
-        this.error = true;
+        this.institutionError = true;
       }
         
     },
@@ -103,15 +103,15 @@ export default {
         catch (e) {
           this.loading = false;
           console.log(e);
-          this.error = true;
+          this.institutionError = true;
         }
       },
       showError(){
-        this.error=true;
-        setTimeout(() => this.error = false, 5000);
+        this.institutionError=true;
+        setTimeout(() => this.institutionError = false, 5000);
       },
       hideError(){
-        this.error=false;
+        this.institutionError=false;
       },
       exitEdit(){
         this.editInstitution=false;

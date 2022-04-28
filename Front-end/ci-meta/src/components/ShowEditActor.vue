@@ -31,7 +31,6 @@
         <b-col>
         Sender
           <vue-single-select v-model="fromId" :options="persons" option-label="text" />
-          {{fromId}}
         </b-col>
         <b-col>
         Recipient
