@@ -17,8 +17,9 @@
           <b-row>
             <b-col b-col>
               <div class="text-center">
-                <p class="h4 mb-2"><b-icon icon="search" variant="primary" size="lg"></b-icon> 
-                <router-link style="text-decoration: none;" to="/search"> Search</router-link>  
+                <p class="h4 mb-2">
+                  <b-icon icon="search" variant="primary" size="lg"></b-icon> 
+                  <router-link style="text-decoration: none;" to="/search"> Search</router-link>  
                 </p>
               </div>
             </b-col>
@@ -31,8 +32,11 @@
               </div>
             </b-col>
           </b-row>
+          <b-row>
+            <list-documents />
+          </b-row>
         </b-container>
-        <list-documents />
+
       </b-tab>
       <b-tab title="Places" >
         <list-places />
@@ -57,24 +61,24 @@ import ListPersons from './ListPersons.vue';
 import ListInstitutions from './ListInstitutions.vue';
 import Login from './Login.vue';
 
-  export default {
-    components: {
-      ListDocuments,
-      InsertImage,
-      InsertImageHome,
-      InsertPlace,
-      ListPlaces,
-      ListPersons,
-      ListInstitutions,
-      Login,
-    },
-    data() {
-          return {
-              images: {
-                cimento: require('../../public/cimento.png')
-              }
-          }
-      }
+export default {
+  components: {
+    ListDocuments,
+    InsertImage,
+    InsertImageHome,
+    InsertPlace,
+    ListPlaces,
+    ListPersons,
+    ListInstitutions,
+    Login,
+  },
+  data() {
+        return {
+            images: {
+              cimento: require('../../public/cimento.png')
+            }
+        }
+    }
 };
 
 </script>

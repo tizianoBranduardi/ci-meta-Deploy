@@ -9,10 +9,10 @@
             >
       <b-row v-show="!edit" class="text-center">
         <b-col cols=5>
-          Sender : <i>{{from}}</i>
+          <b>Sender</b> : <i>{{from}}</i>
         </b-col>
         <b-col cols=5>
-          Recipient : <i>{{to}}</i>
+          <b>Recipient</b> : <i>{{to}}</i>
         </b-col>
         <b-col cols=2>
           <b-button variant="link" size="sm" @click="edit = true">

@@ -11,7 +11,7 @@
           <p class="h4 mb-2">
             <b-icon icon="plus-circle" variant="primary" size="lg">
             </b-icon>
-            <b-button variant="link" @click="newPlace=!newPlace, error=false">Add New</b-button>
+            <b-button style="text-decoration: none;" variant="link" @click="newPlace=!newPlace, error=false">Add New</b-button>
           </p>
           <insert-place v-show="newPlace"/>
           <div v-show="error" class="error">

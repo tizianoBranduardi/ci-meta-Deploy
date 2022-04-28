@@ -2,11 +2,10 @@
 import json
 from os import defpath
 from typing import Text
-from sqlalchemy import Boolean, Column, Date, DateTime, ForeignKey, Integer, LargeBinary, String, UniqueConstraint, text, Sequence
+from sqlalchemy import Boolean, Column, Date, ForeignKey, Integer, String, UniqueConstraint, text, Sequence
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import TEXT
 from flask_appbuilder import Model
-from flask_appbuilder.security.sqla.models import User
 
 
 class Document(Model):
@@ -29,13 +28,8 @@ class Document(Model):
     is_date_deduced = Column(Boolean)
     is_deleted = Column(Boolean, server_default=text("false"))
 
-    def json(self) :
-	    return {"id": self.id, "type": self.type, "incipit": self.incipit, "transcription": self.transcription,\
-            "language": self.language, "gregorian_date": str(self.gregorian_date), "collection": self.collection, "folder": self.folder,\
-            "note": self.note, "shelfmark": self.shelfmark, "folder_number": self.folder_number, "is_date_deduced": self.is_date_deduced, "is_deleted": self.is_deleted}
     def __repr__(self):
-        return json.dumps(self.json())
-
+        return self.tablename
 class Appuser(Model):
     __tablename__ = 'appuser'
 
@@ -47,7 +41,7 @@ class Appuser(Model):
     is_disabled = Column(Boolean, server_default=text("false"))
 
     def __repr__(self):
-        return self.name
+        return self.tablename
     
     def __init__(self, username, password, auth_key, password_reset_token, is_disabled):
         self.username = username
@@ -74,7 +68,7 @@ class Person(Model):
     is_validated = Column(Boolean)
 
     def __repr__(self):
-        return self.name
+        return self.tablename
 
 
 class Place(Model):
@@ -87,7 +81,7 @@ class Place(Model):
     is_validated = Column(Boolean)
     
     def __repr__(self):
-        return self.name
+        return self.tablename
 
 class Actor(Model):
     __tablename__ = 'actor'
@@ -103,7 +97,7 @@ class Actor(Model):
     person = relationship('Person')
 
     def __repr__(self):
-        return self.name
+        return self.tablename
 
 
 class Image(Model):
@@ -118,7 +112,7 @@ class Image(Model):
     document = relationship('Document')
 
     def __repr__(self):
-        return self.name
+        return self.tablename
 
 
 class Position(Model):
@@ -137,7 +131,7 @@ class Position(Model):
     place = relationship('Place')
 
     def __repr__(self):
-        return self.name
+        return self.tablename
 
 class Institution(Model):
     __tablename__ = 'institution'
@@ -151,13 +145,11 @@ class Institution(Model):
     notes = Column(String(255),nullable=True)
 
     def __repr__(self):
-        return self.name
+        return self.tablename
 
 class Affiliation(Model):
     __tablename__ = 'affiliation'
-    __table_args__ = (
-        UniqueConstraint('person_id', 'institution_id'),
-    )
+
     id=Column(Integer, Sequence('affiliation_id_seq'), primary_key=True, nullable=True)
     person_id = Column(ForeignKey('person.id', ondelete='CASCADE'), nullable=False)
     institution_id = Column(ForeignKey('institution.id', ondelete='CASCADE'), nullable=False)
@@ -168,16 +160,14 @@ class Affiliation(Model):
     institution = relationship('Institution')
 
     def __repr__(self):
-        return self.name
+        return self.tablename
 
-# class Quotation(Model):
-#     __tablename__ = 'citation'
+class Configuration(Model):
+    __tablename__ = 'configuration'
 
-#     quoting_document = Column(ForeignKey('document.id', ondelete='CASCADE'), primary_key=True, nullable=False)
-#     quoted_document = Column(ForeignKey('document.id', ondelete='CASCADE'), primary_key=True, nullable=False)
+    id=Column(Integer, Sequence('configuration_id_seq'), primary_key=True, nullable=True)
+    key = Column(String(255))
+    value = Column(String(255))
 
-#     quoting = relationship('Document')
-#     quoted = relationship('Document')
-
-#     def __repr__(self):
-#         return self.name
+    def __repr__(self):
+        return self.tablename

@@ -132,7 +132,7 @@
         </b-col>
         <b-col b-col >
           <p v-show="!editLinks">
-            <strong>Links &emsp;</strong>{{links}}
+            <strong>Links &emsp;</strong><a :href="links" target="_blank">{{links}}</a>
             <b-button variant="link" size="sm" @click="editLinks = true">
                 <b-icon icon="pencil-square" ></b-icon>
             </b-button>

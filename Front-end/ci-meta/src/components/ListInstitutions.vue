@@ -11,7 +11,7 @@
           <p class="h4 mb-2">
             <b-icon icon="plus-circle" variant="primary" size="lg">
             </b-icon>
-            <b-button variant="link" @click="newInstitution=!newInstitution, error=false">Add New</b-button>
+            <b-button style="text-decoration: none;" variant="link" @click="newInstitution=!newInstitution, error=false">Add New</b-button>
           </p>
           <div v-show="error" class="error">
             <br>
