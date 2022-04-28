@@ -158,7 +158,7 @@ class Affiliation(Model):
     __table_args__ = (
         UniqueConstraint('person_id', 'institution_id'),
     )
-
+    
     person_id = Column(ForeignKey('person.id', ondelete='CASCADE'), primary_key=True, nullable=False)
     institution_id = Column(ForeignKey('institution.id', ondelete='CASCADE'), primary_key=True, nullable=False)
     from_date = Column(Date)

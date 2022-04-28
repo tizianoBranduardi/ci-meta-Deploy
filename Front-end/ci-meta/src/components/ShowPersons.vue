@@ -148,6 +148,7 @@
         </b-col>
       </b-row>
       <hr>
+      <show-edit-affiliation :personId="this.id" />
       <br>
 <!-- Note -->
       <b-row>
@@ -173,7 +174,10 @@
 </template>
 
 <script>
+import ShowEditAffiliation from './ShowEditAffiliation.vue';
+
 export default {
+  components: { ShowEditAffiliation },
   name: 'ShowPersons',
   props : ['id'],
   data () {

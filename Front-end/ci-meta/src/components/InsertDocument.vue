@@ -139,9 +139,19 @@
       <b-row>
         <b-col>
           <insert-image :id="docId" ref="images" />
+          <br>
         </b-col>
-        <b-col style="display-inline">
+      </b-row>
+      <b-row>
+        <b-col>
           <show-edit-position :docId="docId"/>
+          <br>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <show-edit-actor :docId="docId"/>
+          <br>
         </b-col>
       </b-row>
       <b-row>
@@ -157,10 +167,11 @@
 
 <script>
 import ShowEditPosition from './ShowEditPosition.vue';
+import ShowEditActor from './ShowEditActor.vue';
 import InsertImage from './InsertImage.vue';
 export default ({
     name: 'insertDocument',
-    components: { InsertImage, ShowEditPosition },
+    components: { InsertImage, ShowEditPosition, ShowEditActor },
     data(){
       return{
         documentType: '',
