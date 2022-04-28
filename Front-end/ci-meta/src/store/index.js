@@ -9,9 +9,8 @@ export default new Vuex.Store({
     address: '172.20.27.81:8080/back-end',
     logged: false,
     id : 0,
-    documentType: [{value: 'research notes', text: 'Research notes'},
-                    {value: 'letter', text: 'Letter'}],
-    language: [{value: 'latin', text: 'Latin'}, {value: 'italian', text: 'Italian'}],
+    documentType: [],
+    language: [],
   },
   mutations: {
     login(state, payload) {

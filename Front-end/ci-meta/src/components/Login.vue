@@ -70,11 +70,11 @@
             this.$http.defaults.headers.common['Authorization'] ='Bearer '+response.data.access_token;
             this.$store.commit('login', {username: this.uname, token: response.data.access_token, address: this.address});
             this.findId();
+            this.loadConfiguration();
             this.$router.push({ name: 'Home'});
           }
         }
         catch (e) {
-          console.log(this.address);
           console.log(e);
           this.error = true;
           this.loading= false;
@@ -88,6 +88,23 @@
             if(user.username==this.uname){
               this.$store.commit('id', response.data.ids[index]);
               }
+            });
+        }
+        catch (e){
+          console.log(e);
+        }
+      },
+      async loadConfiguration(){
+        try{
+          const headers = { 'Content-Type': 'application/json' };
+          const response = await this.$http.get('http://'+this.address+'/api/v1/configuration/', headers);
+          response.data.result.forEach((element, index) => {
+            if(element.key=='language'){
+              this.$store.commit('storeLanguage', element.value);
+            }
+            if(element.key=='docType'){
+              this.$store.commit('storeDocumentType', element.value);
+            }
             });
         }
         catch (e){
