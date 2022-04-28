@@ -158,14 +158,26 @@ class Affiliation(Model):
     __table_args__ = (
         UniqueConstraint('person_id', 'institution_id'),
     )
-    
+
     person_id = Column(ForeignKey('person.id', ondelete='CASCADE'), primary_key=True, nullable=False)
     institution_id = Column(ForeignKey('institution.id', ondelete='CASCADE'), primary_key=True, nullable=False)
-    from_date = Column(Date)
-    to_date= Column(Date)
+    from_date = Column(Integer)
+    to_date= Column(Integer)
 
     person = relationship('Person')
     institution = relationship('Institution')
+
+    def __repr__(self):
+        return self.name
+
+class Quotation(Model):
+    __tablename__ = 'citation'
+
+    quoting_document = Column(ForeignKey('document.id', ondelete='CASCADE'), nullable=False)
+    quoted_document = Column(ForeignKey('document.id', ondelete='CASCADE'), nullable=False)
+
+    quoting = relationship('Document')
+    quoted = relationship('Document')
 
     def __repr__(self):
         return self.name

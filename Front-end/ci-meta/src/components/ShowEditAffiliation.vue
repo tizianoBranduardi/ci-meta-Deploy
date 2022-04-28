@@ -65,8 +65,13 @@
         </b-col>
         <b-col>
           <br>
-          <b-button variant="primary" size="sm" @click="addAffiliation(), newAffiliation=false">Save
+          <b-button variant="primary" size="sm" @click="addAffiliation()">Save
           </b-button>
+        </b-col>
+      </b-row>
+      <b-row v-show="error" class="text-center">
+        <b-col>
+          <b>Error! Check the input [From & To date fields must be only numbers]</b>
         </b-col>
       </b-row>
 
@@ -95,6 +100,7 @@ export default {
       from : '-- missing --',
       edit: false,
       description: '',
+      error: false,
     }
   },
   async mounted(){
@@ -117,22 +123,26 @@ export default {
       }
     }
     catch (e) {
-      this.loading = false;
       console.log(e);
-      this.error = true;
     }
   },
   methods : {
     async addAffiliation(){
+      this.error=false;
       try {
         const header = { 'Content-Type': 'application/json' };
         const data = {'person': this.personId, 'institution':parseInt(this.newInstitution.split("-")[0]), 'from_date': parseInt(this.newFrom), 'to_date': parseInt(this.newTo)};
         const response = await this.$http.post('http://'+this.$store.state.address+'/api/v1/affiliation/', data, header);
         if(response.status==200){
-          this.affiliations.push({value:'', text:this.newInstitution});
+          this.newAffiliation=false;
+          this.affiliations.push(response.result);
+        }
+        else {
+          this.error=true;
         }
       }
       catch (e) {
+        this.error=true;
         console.log(e);
       }      
     }

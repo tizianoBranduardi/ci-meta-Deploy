@@ -73,3 +73,10 @@ class Affiliation(ModelRestApi):
     page_size=1000
 
 appbuilder.add_api(Affiliation)
+
+class Quotation(ModelRestApi):
+    resource_name = 'quotation'
+    datamodel = SQLAInterface(Quotation)
+    page_size=1000
+
+appbuilder.add_api(Quotation)
