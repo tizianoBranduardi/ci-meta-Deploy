@@ -170,14 +170,14 @@ class Affiliation(Model):
     def __repr__(self):
         return self.name
 
-class Quotation(Model):
-    __tablename__ = 'citation'
+# class Quotation(Model):
+#     __tablename__ = 'citation'
 
-    quoting_document = Column(ForeignKey('document.id', ondelete='CASCADE'), primary_key=True, nullable=False)
-    quoted_document = Column(ForeignKey('document.id', ondelete='CASCADE'), primary_key=True, nullable=False)
+#     quoting_document = Column(ForeignKey('document.id', ondelete='CASCADE'), primary_key=True, nullable=False)
+#     quoted_document = Column(ForeignKey('document.id', ondelete='CASCADE'), primary_key=True, nullable=False)
 
-    quoting = relationship('Document')
-    quoted = relationship('Document')
+#     quoting = relationship('Document')
+#     quoted = relationship('Document')
 
-    def __repr__(self):
-        return self.name
+#     def __repr__(self):
+#         return self.name
