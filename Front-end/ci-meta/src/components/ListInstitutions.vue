@@ -108,7 +108,7 @@ export default {
       },
       showError(){
         this.institutionError=true;
-        setTimeout(() => this.institutionError = false, 5000);
+        // setTimeout(() => this.institutionError = false, 5000);
       },
       hideError(){
         this.institutionError=false;
